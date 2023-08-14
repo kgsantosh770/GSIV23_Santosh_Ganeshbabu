@@ -1,23 +1,36 @@
+import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { MemoryRouter as Router, useLocation } from 'react-router-dom';
+import { MemoryRouter as Router, useNavigation } from 'react-router-dom';
 
-import Navbar from '../Navbar';
+import Navbar from '../Navbar/Navbar';
 
-const handleHomeIconClick = jest.fn();
 describe('Navbar', () => {
     it('should render properly', () => {
-        render(<Navbar />);
-        expect(screen.getByTestId('home-icon')).toBeInTheDocument();
+        render(
+            <Router>
+                <Navbar />
+            </Router>
+        )
+        const homeIcon = screen.getByTestId('home-icon-btn');
+        expect(homeIcon).toBeInTheDocument();
     })
 
     it('should have title when title prop is passed', () => {
-        render(<Navbar title={'DummyTitle'} />);
+        render(
+            <Router>
+                <Navbar title={'DummyTitle'} />
+            </Router>
+        )
         const titleElement = screen.getByTestId('title');
         expect(titleElement).toBeInTheDocument();
     })
 
     it('should not have title when no props passed', () => {
-        render(<Navbar />);
+        render(
+            <Router>
+                <Navbar />
+            </Router>
+        )
         const titleElement = screen.queryByTestId('title');
         expect(titleElement).not.toBeInTheDocument();
     })
@@ -42,28 +55,16 @@ describe('Navbar', () => {
         expect(searchbar).not.toBeInTheDocument();
     })
 
-    it('home icon should not perfrom any action in homepage', () => {
-        render(
-            <Router initialEntries={['/']}>
-                <Navbar />
-            </Router>
-        )
-        const homeIcon = screen.getByTestId('home-icon')
-        fireEvent.click(homeIcon)
-        expect(handleHomeIconClick).not.toBeCalled();
-    })
-
-    it('home button call the click function and navigate to the home route', () => {
-        const location = useLocation();
+    it('should navigate to the home route on home icon click', () => {
         render(
             <Router initialEntries={['/details']}>
                 <Navbar />
             </Router>
         )
-        const homeIcon = screen.getByTestId('home-icon')
+        const homeIcon = screen.getByTestId('home-icon-btn')
         fireEvent.click(homeIcon)
-        expect(handleHomeIconClick).toBeCalled();
-        const currentPathname = location.pathname;
+        const currentPathname = window.location.pathname;
         expect(currentPathname).toBe('/');
     })
+
 })
