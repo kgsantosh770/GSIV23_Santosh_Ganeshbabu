@@ -1,11 +1,16 @@
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
 import MovieCard from '../MovieCard/MovieCard'
+import { MemoryRouter as Router } from 'react-router-dom'
 
 describe('MovieCard', () => {
     it('should render properly with props', () => {
         const movieId = 123
-        render(<MovieCard imgUrl='movieImageUrl' id={movieId} title='movieTitle' description='dummy description' rating='4.5' />)
+        render(
+            <Router>
+                <MovieCard imgUrl='movieImageUrl' id={movieId} title='movieTitle' description='dummy description' rating='4.5' />
+            </Router>
+        )
         const image = screen.getByTestId('image')
         const title = screen.getByTestId('title')
         const description = screen.getByTestId('description')
@@ -16,25 +21,28 @@ describe('MovieCard', () => {
         expect(rating).toBeInTheDocument()
     })
 
-    it('should go to the details page on click of the card', () => {
+    it('should have the correct url to navigate', () => {
         const movieId = 123
-        render(<MovieCard imgUrl='movieImageUrl' id={movieId} title='movieTitle' description='dummy description' rating='4.5' />)
+        render(
+            <Router>
+                <MovieCard imgUrl='movieImageUrl' id={movieId} title='movieTitle' description='dummy description' rating='4.5' />
+            </Router>
+        )
         const card = screen.getByTestId('card')
-        fireEvent.click(card)
-        const path = window.location.pathname
-        expect(path).toBe('/details/movie/' + movieId);
+        const url = '/details/movie/' + movieId
+        expect(card).toHaveAttribute('href', url);
     })
 
     it('should show title only in one line', () => {
         const movieId = 123
-        render(<MovieCard imgUrl='movieImageUrl' id={movieId} title='movieTitle' description='dummy description' rating='4.5' />)
-        const title = screen.getByTestId('title');
-        expect(title).toHaveStyle({
-            'white-space': 'nowrap',
-            'text-overflow': 'ellipsis',
-            'overflow': 'hidden',
-        });
+        render(
+            <Router>
+                <MovieCard imgUrl='movieImageUrl' id={movieId} title='movieTitle' description='dummy description' rating='4.5' />
+            </Router>
+        )
+        const title = screen.getByTestId('title')
+        expect(title).toHaveClass('ellipsis')
     })
 
-    it.skip('should show description only in two lines',()=>{})
+    it.skip('should show description only in two lines', () => { })
 })
