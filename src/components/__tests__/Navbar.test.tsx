@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { MemoryRouter as Router, useNavigation } from 'react-router-dom';
+import { MemoryRouter as Router } from 'react-router-dom';
 
 import Navbar from '../Navbar/Navbar';
 
