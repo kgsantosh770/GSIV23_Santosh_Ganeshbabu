@@ -1,6 +1,15 @@
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+
 function App() {
   return (
-    <div></div>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" />
+        <Route path="/details" />
+      </Routes>
+    </>
   );
 }
 
