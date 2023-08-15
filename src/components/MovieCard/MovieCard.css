@@ -92,18 +92,10 @@
         width: calc(33.33% - 20px);
         margin: 1.5rem 0px 0px;
     }
-
-    .card-img {
-        height: 220px;
-    }
 }
 
 @media only screen and (min-width: 991px) {
     .card {
         width: calc((100% - 60px) / 5);
-    }
-
-    .card-img {
-        height: 220px;
     }
 }
