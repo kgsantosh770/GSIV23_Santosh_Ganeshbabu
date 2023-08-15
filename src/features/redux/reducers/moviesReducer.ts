@@ -7,18 +7,19 @@ interface IMoviesReducerState {
   error: null | string | undefined,
 }
 
-export const getUpcomingMovies = createAsyncThunk('movies/getUpcoming', async () => {
-  const response = await fetchUpcomingMovies();
+export const getUpcomingMovies = createAsyncThunk('movies/getUpcoming', async (page: number) => {
+  const pageNumber = page ?? 1
+  const response = await fetchUpcomingMovies(pageNumber);
   return response;
 });
 
 export const moviesReducer = createSlice({
   name: 'movie',
-  initialState: <IMoviesReducerState>{
+  initialState: {
     movies: {},
     loading: false,
     error: null,
-  },
+  } as IMoviesReducerState,
   reducers: {},
   extraReducers: (builder) => {
     builder

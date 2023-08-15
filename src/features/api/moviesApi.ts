@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import apiClient from "./apiClient";
 import { UPCOMING_MOVIES } from "./endpoints";
 
@@ -27,13 +27,13 @@ export interface IMoviesData {
     total_results: number,
 }
 
-export const fetchUpcomingMovies = async (queryParams?: string) => {
+export const fetchUpcomingMovies = async (page: number) => {
     try {
-        const endpoint = queryParams ? `${UPCOMING_MOVIES}/${queryParams}` : UPCOMING_MOVIES
+        const endpoint = `${UPCOMING_MOVIES}?page=${page}`
         const response = await apiClient.get(endpoint)
         const data: IMoviesData = response.data
         return data
-    } catch (err: AxiosError | any) {
+    } catch (err: any) {
         if (axios.isAxiosError(err)) {
             return err.response
         } else {
