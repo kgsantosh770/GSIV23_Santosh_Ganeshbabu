@@ -1,6 +1,8 @@
 :root{
   --light-grey: #efeded;
   --text-light-grey: #b1b0b0;
+  --primary-color: #0f7be6;
+  --primary-color-light: #1a85f029;
 }
 
 body {
