@@ -23,7 +23,17 @@
     height: 100%;
 }
 
-.card img:hover {
+.card-img.default {
+    display: flex;
+}
+
+.card-img.default img {
+    width: auto;
+    height: auto;
+    margin: auto;
+}
+
+.card-img:not(.default) img:hover {
     transform: scale(1.1);
 }
 
@@ -38,6 +48,7 @@
 
 .card .title {
     max-width: 70%;
+    font-weight: bold;
 }
 
 .card .ellipsis {
@@ -48,6 +59,11 @@
 
 .card .desc {
     margin-top: 1rem;
+    overflow: hidden;
+    display: -webkit-box;
+    max-height: 47px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .card .rating {

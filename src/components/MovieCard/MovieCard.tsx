@@ -12,13 +12,13 @@ interface IMovieCardProps {
 const MovieCard = (props: IMovieCardProps) => {
   return (
     <Link to={`/details/movie/${props.id}`} data-testid="card" className="card">
-      <div className="card-img">
+      <div className={props.imgUrl.startsWith('data:') ? 'card-img default' : 'card-img'}>
         <img data-testid="image" src={props.imgUrl} alt="movie" />
       </div>
       <div className="card-content">
         <p data-testid="title" className="title ellipsis">{props.title}</p>
-        <p data-testid="description" className="desc ellipsis">{props.description}</p>
-        <p data-testid="rating" className="rating">{props.rating}</p>
+        <p data-testid="description" className="desc">{props.description}</p>
+        {props.rating > 0 && <p data-testid="rating" className="rating">⭐ {props.rating}</p>}
       </div>
     </Link>
   )

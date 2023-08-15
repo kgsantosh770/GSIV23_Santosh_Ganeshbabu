@@ -7,6 +7,7 @@
     padding: 0px;
     border: 1px solid var(--text-light-grey);
     border-radius: 5px;
+    width: max-content;
 }
 
 .page-item {
