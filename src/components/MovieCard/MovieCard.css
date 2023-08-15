@@ -36,6 +36,10 @@
     margin: 0px;
 }
 
+.card .title {
+    max-width: 70%;
+}
+
 .card .ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;

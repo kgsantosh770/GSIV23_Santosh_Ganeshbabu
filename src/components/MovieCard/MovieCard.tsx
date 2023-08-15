@@ -6,7 +6,7 @@ interface IMovieCardProps {
   imgUrl: string,
   title: string,
   description: string,
-  rating: string,
+  rating: number,
 }
 
 const MovieCard = (props: IMovieCardProps) => {
@@ -17,7 +17,7 @@ const MovieCard = (props: IMovieCardProps) => {
       </div>
       <div className="card-content">
         <p data-testid="title" className="title ellipsis">{props.title}</p>
-        <p data-testid="description" className="desc">{props.description}</p>
+        <p data-testid="description" className="desc ellipsis">{props.description}</p>
         <p data-testid="rating" className="rating">{props.rating}</p>
       </div>
     </Link>
