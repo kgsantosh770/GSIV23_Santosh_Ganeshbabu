@@ -43,4 +43,14 @@ describe('MovieCard', () => {
         const title = screen.getByTestId('title')
         expect(title).toHaveClass('ellipsis')
     })
+
+    it('should show rating only if it is greater than 0', ()=>{
+        render(
+            <Router>
+                <MovieCard imgUrl='movieImageUrl' id={123} title='movieTitle' description='dummy description' rating={0} />
+            </Router>
+        )
+        const ratingElement = screen.queryByTestId('rating')
+        expect(ratingElement).not.toBeInTheDocument()
+    })
 })

@@ -11,9 +11,9 @@ jest.mock('./features/api/apiClient')
 
 const responseData = {
     results: [
-        { adult: false, backdrop_path: '/zN41DPmPhwmgJjHwezALdrdvD0h.jpg', genre_ids: Array(3), id: 615656, original_language: 'en', },
-        { adult: false, backdrop_path: '/iEFuHjqrE059SmflBva1JzDJutE.jpg', genre_ids: Array(5), id: 496450, original_language: 'fr', },
-        { adult: false, backdrop_path: '/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg', genre_ids: Array(2), id: 872585, original_language: 'en', },
+        { adult: false, poster_path: null, genre_ids: Array(3), id: 615656, original_language: 'en', },
+        { adult: false, poster_path: '/iEFuHjqrE059SmflBva1JzDJutE.jpg', genre_ids: Array(5), id: 496450, original_language: 'fr', },
+        { adult: false, poster_path: '/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg', genre_ids: Array(2), id: 872585, original_language: 'en', },
     ],
 }
 
@@ -76,6 +76,24 @@ describe('App', () => {
             const paginationComponent = screen.getAllByRole('navigation')
             expect(paginationComponent).toHaveLength(1)
             expect(paginationComponent[0]).not.toHaveClass('pagination')
+        })
+    })
+
+    it('should show default image poster path is null', async () => {
+        (apiClient.get as jest.Mock).mockResolvedValue({ data: responseData })
+        await act(async () => {
+            render(
+                <Provider store={store}>
+                    <Router>
+                        <App />
+                    </Router>
+                </Provider>
+            )
+        })
+        await waitFor(() => {
+            const cards = screen.getAllByTestId('card')
+            const imgUrl = cards.at(0)?.getElementsByTagName('img')[0].getAttribute('src')
+            expect(imgUrl).toBe('default-movie.png')
         })
     })
 })
