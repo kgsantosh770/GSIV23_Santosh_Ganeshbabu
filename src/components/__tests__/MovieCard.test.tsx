@@ -8,7 +8,7 @@ describe('MovieCard', () => {
         const movieId = 123
         render(
             <Router>
-                <MovieCard imgUrl='movieImageUrl' id={movieId} title='movieTitle' description='dummy description' rating='4.5' />
+                <MovieCard imgUrl='movieImageUrl' id={movieId} title='movieTitle' description='dummy description' rating={4.5} />
             </Router>
         )
         const image = screen.getByTestId('image')
@@ -25,7 +25,7 @@ describe('MovieCard', () => {
         const movieId = 123
         render(
             <Router>
-                <MovieCard imgUrl='movieImageUrl' id={movieId} title='movieTitle' description='dummy description' rating='4.5' />
+                <MovieCard imgUrl='movieImageUrl' id={movieId} title='movieTitle' description='dummy description' rating={4.5} />
             </Router>
         )
         const card = screen.getByTestId('card')
@@ -37,12 +37,10 @@ describe('MovieCard', () => {
         const movieId = 123
         render(
             <Router>
-                <MovieCard imgUrl='movieImageUrl' id={movieId} title='movieTitle' description='dummy description' rating='4.5' />
+                <MovieCard imgUrl='movieImageUrl' id={movieId} title='movieTitle' description='dummy description' rating={4.5} />
             </Router>
         )
         const title = screen.getByTestId('title')
         expect(title).toHaveClass('ellipsis')
     })
-
-    it.skip('should show description only in two lines', () => { })
 })

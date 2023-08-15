@@ -13,7 +13,6 @@ describe('Pagination', () => {
 
     it('should render properly', () => {
         const paginatedElement = screen.getByRole('navigation')
-        console.log(paginatedElement)
         expect(paginatedElement).toHaveClass('pagination')
         expect(paginatedElement).toBeInTheDocument()
     })
