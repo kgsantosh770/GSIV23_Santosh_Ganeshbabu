@@ -19,6 +19,35 @@ interface IMoivie {
     vote_count: number,
 }
 
+interface ICast {
+    adult: boolean,
+    gender: number,
+    id: number,
+    known_for_department: string,
+    name: string,
+    original_name: string,
+    popularity: number,
+    profile_path: string,
+    cast_id: number,
+    character: string,
+    credit_id: string,
+    order: number,
+}
+
+interface ICrew {
+    adult: boolean,
+    gender: number,
+    id: number,
+    known_for_department: string,
+    name: string,
+    original_name: string,
+    popularity: number,
+    profile_path: string,
+    credit_id: string,
+    department: string,
+    job: string,
+}
+
 export interface IMoviesData {
     dates?: {},
     page: number,
@@ -53,43 +82,14 @@ export interface ISingleMovie {
     video: boolean,
     vote_average: number,
     vote_count: number,
-    director: string,
+    director: string | undefined,
     cast: string[],
 }
 
 interface ICastAndCrew {
     id: Number,
-    cast: [
-        {
-            adult: boolean,
-            gender: number,
-            id: number,
-            known_for_department: string,
-            name: string,
-            original_name: string,
-            popularity: number,
-            profile_path: string,
-            cast_id: number,
-            character: string,
-            credit_id: string,
-            order: number,
-        }
-    ],
-    crew: [
-        {
-            adult: boolean,
-            gender: number,
-            id: number,
-            known_for_department: string,
-            name: string,
-            original_name: string,
-            popularity: number,
-            profile_path: string,
-            credit_id: string,
-            department: string,
-            job: string,
-        }
-    ]
+    cast: ICast[],
+    crew: ICrew[],
 }
 
 export const fetchUpcomingMovies = async (page: number) => {
@@ -114,7 +114,9 @@ export const fetchMovie = async (id: number) => {
         const movieDetails: ISingleMovie = (await apiClient.get(detailsEndpoint)).data
         const credits: ICastAndCrew = (await apiClient.get(creditsEndpoint)).data
         let data: ISingleMovie = movieDetails
-        data.director = credits.crew.filter(({ job }) => job === 'Director')[0].name
+        const directors = credits.crew.filter(({ job }) => job === 'Director')
+        const director = directors.length > 0 ? directors[0] : undefined
+        data.director = director !== undefined ? director.name : undefined
         data.cast = credits.cast.map((person) => person.name)
         return data
     } catch (error: any) {

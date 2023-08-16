@@ -16,18 +16,24 @@ const Navbar = (props: INavbarProps) => {
     const isHome = location.pathname === '/'
     const dispatch = useDispatch<AppDispatch>()
     const stateDispatch = useDispatch()
-    const {searchText} = useSelector((state: StoreState) => state.movies)
+    const { searchText } = useSelector((state: StoreState) => state.movies)
     const [inputSearchText, setInputSearchText] = useState<string>(searchText)
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputSearchText(event.target.value)
-        if(event.target.value === '')
+        if (event.target.value === '')
             dispatch(getUpcomingMovies(1))
     }
-    
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            handleSearch()
+        }
+    };
+
     const handleSearch = () => {
         const page: number = 1
-        if(searchText !== inputSearchText)
+        if (searchText !== inputSearchText)
             stateDispatch(setSearchText(inputSearchText))
         if (inputSearchText !== '' && searchText !== inputSearchText)
             dispatch(getSearchResults(page))
@@ -50,6 +56,7 @@ const Navbar = (props: INavbarProps) => {
                         placeholder="Search"
                         aria-label="Search"
                         onChange={handleChange}
+                        onKeyDown={handleKeyDown}
                     />
                     <button data-testid="search-btn" onClick={handleSearch}>Search</button>
                 </div>
