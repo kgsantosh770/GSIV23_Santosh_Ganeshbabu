@@ -1,8 +1,9 @@
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter as Router } from 'react-router-dom';
-
 import Navbar from '../Navbar/Navbar';
+
+const handleSearch = jest.fn()
 
 describe('Navbar', () => {
     it('should render properly', () => {
@@ -65,6 +66,17 @@ describe('Navbar', () => {
         fireEvent.click(homeIcon)
         const currentPathname = window.location.pathname;
         expect(currentPathname).toBe('/');
+    })
+
+    it('should call the handleSearch function on button click', ()=>{
+        render(
+            <Router>
+                <Navbar />
+            </Router>
+        )
+        const button = screen.getByTestId('search-btn')
+        fireEvent.click(button)
+        expect(handleSearch).toHaveBeenCalled()
     })
 
 })
