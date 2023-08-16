@@ -27,17 +27,101 @@ export interface IMoviesData {
     total_results: number,
 }
 
+export interface ISingleMovie {
+    adult: boolean,
+    backdrop_path: string,
+    belongs_to_collection: {},
+    budget: number,
+    genres: [],
+    homepage: string,
+    id: number,
+    imdb_id: string,
+    original_language: string,
+    original_title: string,
+    overview: string,
+    popularity: number,
+    poster_path: string,
+    production_companies: [],
+    production_countries: [],
+    release_date: string,
+    revenue: number,
+    runtime: number,
+    spoken_languages: [],
+    status: string,
+    tagline: string,
+    title: string,
+    video: boolean,
+    vote_average: number,
+    vote_count: number,
+    director: string,
+    cast: string[],
+}
+
+interface ICastAndCrew {
+    id: Number,
+    cast: [
+        {
+            adult: boolean,
+            gender: number,
+            id: number,
+            known_for_department: string,
+            name: string,
+            original_name: string,
+            popularity: number,
+            profile_path: string,
+            cast_id: number,
+            character: string,
+            credit_id: string,
+            order: number,
+        }
+    ],
+    crew: [
+        {
+            adult: boolean,
+            gender: number,
+            id: number,
+            known_for_department: string,
+            name: string,
+            original_name: string,
+            popularity: number,
+            profile_path: string,
+            credit_id: string,
+            department: string,
+            job: string,
+        }
+    ]
+}
+
 export const fetchUpcomingMovies = async (page: number) => {
     try {
         const endpoint = `${UPCOMING_MOVIES}?page=${page}`
         const response = await apiClient.get(endpoint)
         const data: IMoviesData = response.data
         return data
-    } catch (err: any) {
-        if (axios.isAxiosError(err)) {
-            return err.response
+    } catch (error: any) {
+        if (axios.isAxiosError(error)) {
+            return error.response
         } else {
-            return err;
+            return error;
+        }
+    }
+}
+
+export const fetchMovie = async (id: number) => {
+    try {
+        const detailsEndpoint = `/movie/${id}`
+        const creditsEndpoint = `${detailsEndpoint}/credits`
+        const movieDetails: ISingleMovie = (await apiClient.get(detailsEndpoint)).data
+        const credits: ICastAndCrew = (await apiClient.get(creditsEndpoint)).data
+        let data: ISingleMovie = movieDetails
+        data.director = credits.crew.filter(({ job }) => job === 'Director')[0].name
+        data.cast = credits.cast.map((person) => person.name)
+        return data
+    } catch (error: any) {
+        if (axios.isAxiosError(error)) {
+            return error.response
+        } else {
+            return error;
         }
     }
 }
