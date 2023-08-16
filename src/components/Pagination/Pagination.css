@@ -16,7 +16,7 @@
 }
 
 .page-link {
-    padding: .75rem 1.5rem;
+    padding: .75rem 1rem;
     display: block;
 }
 
@@ -36,4 +36,10 @@
 
 .page-item:not(.disabled):not(.active):hover{
     background-color: var(--primary-color-light);
+}
+
+@media only screen and (min-width: 768px) {
+    .page-link {
+        padding: .75rem 1.5rem;
+    }
 }
