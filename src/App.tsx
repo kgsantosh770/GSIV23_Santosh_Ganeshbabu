@@ -24,12 +24,14 @@ function App() {
   const movieCards = allMovies.map((movie, index) => <MovieCard key={index} id={movie.id} imgUrl={movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : defaultMovieImg} title={movie.title} description={movie.overview} rating={movie.vote_average} />)
 
   const AllCards = () => (
+    Object.keys(movies).length > 0 && movies.results.length > 0 ?
     <>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px', padding: '.5rem 1rem' }}>
         {movieCards}
       </div>
       {movies.total_pages && movies.total_pages > 1 && <Pagination totalPages={movies.total_pages} initialPage={movies.page} />}
-    </>
+    </> :
+    <h1 data-testid="no-result" style={{textAlign: 'center'}}>No results found</h1>
   )
 
   return (
@@ -46,6 +48,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AllCards />} />
           <Route path="/details/movie/:id" element={<Details />} />
+          <Route path="*" element={<h1 style={{textAlign: 'center'}}>404: Page Not Fount</h1>} />
         </Routes>
       }
     </>
