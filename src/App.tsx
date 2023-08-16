@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, StoreState } from "./features/redux/store/store"
@@ -7,8 +7,11 @@ import { getUpcomingMovies } from "./features/redux/reducers/moviesReducer"
 import MovieCard, { MovieCardSkimmer } from "./components/MovieCard/MovieCard"
 import Pagination from "./components/Pagination/Pagination"
 import defaultMovieImg from './assets/icons/default-movie.png'
+import Details from "./components/Details/Details"
 
 function App() {
+  const location = useLocation()
+
   const dispatch = useDispatch<AppDispatch>()
   const { movies, loading } = useSelector((state: StoreState) => state.movies)
 
@@ -31,14 +34,18 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      {
+        location.pathname.startsWith('/details/movie') ?
+          <Navbar title="Movie Detials" /> :
+          <Navbar />
+      }
       {loading ?
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px', padding: '.5rem 1rem' }}>
           {skimmerCards}
         </div> :
         <Routes>
           <Route path="/" element={<AllCards />} />
-          <Route path="/details" />
+          <Route path="/details/movie/:id" element={<Details />} />
         </Routes>
       }
     </>
