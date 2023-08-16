@@ -29,7 +29,7 @@ const Navbar = (props: INavbarProps) => {
         const page: number = 1
         if(searchText !== inputSearchText)
             stateDispatch(setSearchText(inputSearchText))
-        if (inputSearchText !== '')
+        if (inputSearchText !== '' && searchText !== inputSearchText)
             dispatch(getSearchResults(page))
     }
 
