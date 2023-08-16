@@ -96,4 +96,21 @@ describe('App', () => {
             expect(imgUrl).toBe('default-movie.png')
         })
     })
+
+    it('should show no results element when the api has returned empty results', async()=>{
+        (apiClient.get as jest.Mock).mockResolvedValue({ data: {results: []} })
+        await act(async () => {
+            render(
+                <Provider store={store}>
+                    <Router>
+                        <App />
+                    </Router>
+                </Provider>
+            )
+        })
+        await waitFor(() => {
+            const noResultsElement = screen.getByTestId('no-result')
+            expect(noResultsElement).toBeInTheDocument()
+        })
+    })
 })
