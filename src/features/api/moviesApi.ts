@@ -2,27 +2,27 @@ import axios from "axios";
 import apiClient from "./apiClient";
 import { UPCOMING_MOVIES } from "./endpoints";
 
+interface IMoivie {
+    adult: boolean,
+    backdrop_path: string,
+    genre_ids: [],
+    id: number,
+    original_language: string,
+    original_title: string,
+    overview: string,
+    popularity: number,
+    poster_path: string,
+    release_date: string,
+    title: string,
+    video: boolean
+    vote_average: number,
+    vote_count: number,
+}
+
 export interface IMoviesData {
-    dates: {},
+    dates?: {},
     page: number,
-    results: [
-        {
-            adult: boolean,
-            backdrop_path: string,
-            genre_ids: [],
-            id: number,
-            original_language: string,
-            original_title: string,
-            overview: string,
-            popularity: number,
-            poster_path: string,
-            release_date: string,
-            title: string,
-            video: boolean
-            vote_average: number,
-            vote_count: number,
-        }
-    ],
+    results: IMoivie[],
     total_pages: number,
     total_results: number,
 }
@@ -116,6 +116,21 @@ export const fetchMovie = async (id: number) => {
         let data: ISingleMovie = movieDetails
         data.director = credits.crew.filter(({ job }) => job === 'Director')[0].name
         data.cast = credits.cast.map((person) => person.name)
+        return data
+    } catch (error: any) {
+        if (axios.isAxiosError(error)) {
+            return error.response
+        } else {
+            return error;
+        }
+    }
+}
+
+export const searchMovie = async (name: string, page: number) => {
+    try {
+        const endpoint = `/search/movie?query=${name}&include_adult=false&page=${page}`
+        const response = await apiClient.get(endpoint)
+        const data: IMoviesData = response.data
         return data
     } catch (error: any) {
         if (axios.isAxiosError(error)) {

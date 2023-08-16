@@ -28,7 +28,6 @@ const Details = () => {
     function toHoursAndMinutes(totalMinutes: number) {
         const hours = ("0" + Math.floor(totalMinutes / 60)).slice(-2)
         const minutes = ("0" + (totalMinutes % 60)).slice(-2)
-
         return `${hours}:${minutes}`
     }
 

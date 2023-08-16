@@ -6,6 +6,15 @@ nav {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+nav .chip {
+    background-color: var(--primary-color-light);
+    color: white;
+    border-radius: 5px;
+    padding: .15rem .5rem .35rem;
+    margin: 0px .25rem .5rem 0px;
+    display: inline-block;
+}
+
 nav.end{
     justify-content: flex-end;
 }
@@ -35,4 +44,8 @@ nav h3 {
     background: transparent;
     outline: 0;
     width: 100%;
+}
+
+.search-bar button {
+    cursor: pointer;
 }

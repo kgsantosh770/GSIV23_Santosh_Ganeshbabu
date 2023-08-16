@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUpcomingMovies(1));
-  }, [])
+  }, [dispatch])
 
   const skimmerCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(card => <MovieCardSkimmer key={card} />)
   const allMovies = Object.keys(movies).length <= 0 ? [] : movies.results
