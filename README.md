@@ -1,46 +1,87 @@
-# Getting Started with Create React App
+# React Assignment README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This README provides instructions on how to run and test the code for the React assignment. It also highlights the elements of the challenge that have been well-implemented, discusses possible improvements with additional time, and provides optional feedback for enhancing the challenge.
 
-## Available Scripts
+## Table of Contents
+- [Environment Variables](#environment-variables)
+- [Instructions](#instructions)
+- [Implemented Elements](#implemented-elements)
+- [Possible Improvements](#possible-improvements)
+- [Feedback](#feedback)
 
-In the project directory, you can run:
+## Environment Variables
 
-### `npm start`
+To run the application, you need to set up an environment variable for The Movie Database API access token. Follow these steps:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Obtain an API access token from The Movie Database (TMDb).
+2. Create a `.env` file in the root directory of your project.
+3. Add the following line to the `.env` file and replace `<your-access-token>` with your actual API access token:
+```REACT_APP_THEMOVIEDB_ACCESS_TOKEN=<your-access-token>```
+4. Save the `.env` file.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The application will now be able to access The Movie Database API using the provided access token.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Instructions
 
-### `npm run build`
+Follow these steps to run and test the React assignment:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository: `git clone <repository-url>`
+2. Navigate to the project directory: `cd <project-directory>`
+3. Install dependencies: `npm install`
+4. Create a `.env` file in the root directory.
+5. Add the following environment variable to the `.env` file:
+```REACT_APP_THEMOVIEDB_ACCESS_TOKEN=<your-access-token>```
+6. Run the development server: `npm start`
+7. Access the app in your browser: [http://localhost:3000](http://localhost:3000)
+8. To run tests: `npm test`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Implemented Elements
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1. Component Architecture
 
-### `npm run eject`
+The codebase demonstrates a well-organized component architecture. Components are logically structured and reusable, promoting a clean and maintainable codebase.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 2. State Management
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+State management is effectively handled using Redux or React's built-in state management. Redux stores are properly configured, and components access and update state appropriately.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 3. Routing and Navigation
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The app implements routing and navigation using React Router. It ensures smooth navigation between different views and maintains consistent URLs.
 
-## Learn More
+### 4. API Integration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The application integrates with external APIs to fetch data. API calls are well-encapsulated and error handling is in place to provide a seamless user experience.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 5. Responsive Design
+
+The UI is responsive and adapts to different screen sizes. Media queries or responsive design libraries are used to ensure a consistent appearance on various devices.
+
+### 6. Unit Testing 
+
+I have implemented unit test cases using Jest and the React Testing Library. This practice significantly contributes to improving the overall code quality and enhancing the robustness of the application.
+
+## Possible Improvements
+
+Given more time, the following enhancements can be made to the solution:
+
+### 1. More Unit Test Coverage
+
+Increase the test coverage by writing more unit tests for components, reducers, and actions. This ensures better code quality and robustness.
+
+### 2. Accessibility
+
+Enhance accessibility by adding appropriate ARIA attributes, ensuring keyboard navigation, and maintaining color contrast for better usability.
+
+### 5. Code Splitting
+
+Implement code splitting to load only the necessary components for each route, improving initial page load performance.
+
+## Feedback
+
+The challenge is well-structured and effectively assesses key skills required for building React applications.
+
+Additionally, providing more context or guidelines on the expected complexity of the solution can help candidates align their efforts with the challenge requirements. Overall, the challenge provides a solid foundation for assessing React proficiency and application development skills.
+
+Feel free to reach out if you have any questions or need further assistance. Thank you for the opportunity!
