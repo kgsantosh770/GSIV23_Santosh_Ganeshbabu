@@ -8,12 +8,16 @@ import './Details.css'
 
 const DetailSkimmer = () => {
     return (
-        <div className="details-skimmer">
-            <div className="left-skimmer"></div>
+        <div className="details-skimmer details-wrapper">
+            <div className="left-skimmer skimmer-bg"></div>
             <div className="right-skimmer">
-                <div className="title-skimmer"></div>
-                <div className="subtitle-skimmer"></div>
-                <div className="desc-skimmr"></div>
+                <div className="group-skimmer">
+                    <div className="title-skimmer skimmer-bg"></div>
+                    <div className="rating-skimmer skimmer-bg"></div>
+                </div>
+                <div className="subtitle-skimmer skimmer-bg"></div>
+                <div className="cast-skimmer skimmer-bg"></div>
+                <div className="desc-skimmer skimmer-bg"></div>
             </div>
         </div>
     )

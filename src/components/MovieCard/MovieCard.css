@@ -73,27 +73,23 @@
     color: var(--text-light-grey);
 }
 
-.skimmer-bg {
-    background: var(--light-grey);
-}
-
-.img-skimmer {
+.card .img-skimmer {
     height: 220px;
 }
 
-.title-skimmer {
+.card .title-skimmer {
     width: 40%;
     height: 10px;
     border-radius: .15rem;
 }
 
-.desc-skimmer {
+.card .desc-skimmer {
     width: 100%;
     height: 20px;
     border-radius: .15rem;
 }
 
-.rating-skimmer {
+.card .rating-skimmer {
     width: 25px;
     height: 10px;
     position: absolute;
